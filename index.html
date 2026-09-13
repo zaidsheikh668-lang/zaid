@@ -1,1182 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CART EXPRESS – Luxury Mobile Store</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA AI — Build Smarter. Move Faster.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              black: '#070B0A',
-              dark: '#0D1412',
-              card: '#121A18',
-              gold: '#D4AF37',
-              goldLight: '#F3E5AB',
-              emerald: '#00e599',
-              emeraldGlow: 'rgba(0, 229, 153, 0.35)',
-              muted: '#8A9A94'
-            }
-          },
-          fontFamily: {
-            serif: ['Cinzel', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 7px; }
-    ::-webkit-scrollbar-track { background: #070B0A; }
-    ::-webkit-scrollbar-thumb { background: #1f2e29; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-
-    /* Glassmorphism Styles */
-    .glass-nav {
-      background: rgba(7, 11, 10, 0.78);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-    }
-    .glass-card {
-      background: rgba(18, 26, 24, 0.7);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(212, 175, 55, 0.12);
-    }
-    .glass-card:hover {
-      border-color: rgba(212, 175, 55, 0.4);
-      box-shadow: 0 10px 30px -10px rgba(0, 229, 153, 0.15);
-    }
-    .gold-glow {
-      text-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
-    }
-    .neon-border-glow {
-      box-shadow: 0 0 25px -4px rgba(0, 229, 153, 0.45);
-    }
-
-    /* Video Hero Layering */
-    .hero-video-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .hero-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1.02);
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(7, 11, 10, 0.45) 0%, rgba(7, 11, 10, 0.88) 85%);
-      z-index: 1;
-    }
-
-    /* Keyframe Animations */
-    @keyframes pulseSoft {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    .floating-badge {
-      animation: pulseSoft 4s ease-in-out infinite;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
 
-<body class="bg-brand-black text-slate-100 font-sans selection:bg-brand-gold selection:text-black antialiased overflow-x-hidden">
-
-  <!-- ================= NOTIFICATION TOAST ================= -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 px-5 py-3 rounded-xl bg-brand-card border border-brand-gold/40 text-brand-gold shadow-2xl">
-    <i class="fa-solid fa-circle-check text-brand-emerald text-lg"></i>
-    <span id="toast-msg" class="text-sm font-medium tracking-wide text-white">Item added to cart!</span>
-  </div>
-
-  <!-- ================= NAVIGATION ================= -->
-  <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300 glass-nav">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brand-gold to-brand-emerald flex items-center justify-center p-[1px] shadow-lg">
-          <div class="w-full h-full bg-brand-black rounded-[7px] flex items-center justify-center">
-            <span class="font-serif font-bold text-lg text-brand-gold">CX</span>
-          </div>
-        </div>
-        <div class="flex flex-col">
-          <span class="font-serif font-bold tracking-[0.18em] text-lg sm:text-xl text-white group-hover:text-brand-gold transition-colors">CART EXPRESS</span>
-          <span class="text-[9px] uppercase tracking-[0.35em] text-brand-gold/80 -mt-1 font-semibold">Luxury Mobile Store</span>
-        </div>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest text-slate-300">
-        <a href="#hero" class="hover:text-brand-gold transition-colors font-medium">Home</a>
-        <a href="#categories" class="hover:text-brand-gold transition-colors font-medium">Categories</a>
-        <a href="#products" class="hover:text-brand-gold transition-colors font-medium">Flagships</a>
-        <a href="#deals" class="hover:text-brand-gold transition-colors font-medium text-brand-emerald flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-brand-emerald animate-ping"></span> Flash Sale
-        </a>
-        <a href="#concierge" class="hover:text-brand-gold transition-colors font-medium">Why CX</a>
-      </nav>
-
-      <!-- Action Icons -->
-      <div class="flex items-center space-x-4 sm:space-x-6">
-        <!-- Search Trigger -->
-        <button onclick="toggleSearchModal(true)" aria-label="Search" class="text-slate-300 hover:text-brand-gold transition-colors p-2">
-          <i class="fa-solid fa-magnifying-glass text-lg"></i>
-        </button>
-
-        <!-- Wishlist Icon -->
-        <button onclick="toggleWishlistDrawer(true)" aria-label="Wishlist" class="text-slate-300 hover:text-brand-gold transition-colors relative p-2">
-          <i class="fa-regular fa-heart text-lg"></i>
-          <span id="wishlist-badge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-gold text-brand-black text-[10px] font-bold flex items-center justify-center hidden">0</span>
-        </button>
-
-        <!-- Cart Button -->
-        <button onclick="toggleCartDrawer(true)" aria-label="Cart" class="relative group bg-gradient-to-r from-brand-gold/20 to-brand-emerald/10 border border-brand-gold/40 px-4 py-2 rounded-full hover:border-brand-gold transition-all flex items-center space-x-2">
-          <i class="fa-solid fa-bag-shopping text-brand-gold text-base"></i>
-          <span class="hidden sm:inline text-xs font-semibold tracking-wider uppercase text-white">Cart</span>
-          <span id="cart-badge" class="w-5 h-5 rounded-full bg-brand-gold text-brand-black text-[11px] font-extrabold flex items-center justify-center">0</span>
-        </button>
-
-        <!-- Mobile Menu Toggle -->
-        <button onclick="toggleMobileNav()" class="md:hidden text-slate-300 hover:text-brand-gold p-2">
-          <i id="mobile-toggle-icon" class="fa-solid fa-bars text-xl"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Drawer Menu -->
-    <div id="mobile-menu" class="hidden md:hidden px-6 pt-3 pb-6 bg-brand-card/95 border-b border-brand-gold/20 backdrop-blur-xl">
-      <div class="flex flex-col space-y-4 text-sm uppercase tracking-widest text-slate-200">
-        <a href="#hero" onclick="toggleMobileNav()" class="hover:text-brand-gold py-1">Home</a>
-        <a href="#categories" onclick="toggleMobileNav()" class="hover:text-brand-gold py-1">Categories</a>
-        <a href="#products" onclick="toggleMobileNav()" class="hover:text-brand-gold py-1">Flagships</a>
-        <a href="#deals" onclick="toggleMobileNav()" class="text-brand-emerald py-1">Exclusive Deals</a>
-        <a href="#concierge" onclick="toggleMobileNav()" class="hover:text-brand-gold py-1">VIP Concierge</a>
-      </div>
-    </div>
+  <header class="nav">
+    <a class="logo" href="#">NOVA<span>AI</span></a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#product">Platform</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="#pricing">Start free</a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
   </header>
 
-  <!-- ================= HERO SECTION WITH AUTOPLAY VIDEO ================= -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-    <!-- Embedded Full-Screen Background Video as specified -->
-    <div class="hero-video-container">
-      <video class="hero-video" autoplay loop muted playsinline preload="auto">
-        <source src="https://www.designarena.ai/u/a87625f6-5330-4588-abe2-4294cbb9944e" type="video/mp4" />
-        Your browser does not support video playback.
-      </video>
-      <div class="hero-overlay"></div>
-    </div>
-
-    <!-- Hero Content -->
-    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-      
-      <!-- Top Tagline Pill -->
-      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-card/70 border border-brand-gold/30 backdrop-blur-md mb-6 animate-fade-in">
-        <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
-        <span class="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-brand-goldLight font-medium">Style Meets Sound &amp; Prestige</span>
+  <main>
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">AI WORKFLOWS FOR MODERN TEAMS</div>
+        <h1>Build smarter.<br><em>Move faster.</em></h1>
+        <p>NOVA AI helps teams automate repetitive work, analyze information, and turn ideas into action.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#pricing">Start Building Free <span>→</span></a>
+          <a class="btn ghost" href="#product">Explore Platform</a>
+        </div>
+        <div class="trust-mini"><span class="dot"></span> No credit card required</div>
       </div>
 
-      <!-- Main Heading -->
-      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase gold-glow leading-[1.1]">
-        PREMIUM TECH.<br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-emerald">SMARTER LIVING.</span>
-      </h1>
-
-      <!-- Subtitle -->
-      <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 font-light tracking-wide mb-10 leading-relaxed">
-        Discover premium smartphones, bespoke gadgets and high-fidelity audio crafted for uncompromising standards.
-      </p>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-        <a href="#products" class="w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold uppercase tracking-widest text-xs hover:shadow-lg hover:shadow-brand-gold/40 transition-all duration-300 transform hover:-translate-y-0.5">
-          SHOP NOW
-        </a>
-        <a href="#categories" class="w-full sm:w-auto px-9 py-4 rounded-full bg-brand-dark/80 text-white font-medium border border-brand-gold/40 hover:border-brand-gold uppercase tracking-widest text-xs backdrop-blur-md hover:bg-brand-card transition-all duration-300 transform hover:-translate-y-0.5">
-          EXPLORE COLLECTION
-        </a>
-      </div>
-
-      <!-- Video Audio/Spec Floating Badges Inspired by Reference -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto pt-6 border-t border-white/10 text-left">
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-black/40 backdrop-blur-sm border border-white/5">
-          <i class="fa-solid fa-gem text-brand-gold text-xl"></i>
-          <div>
-            <h4 class="text-xs uppercase font-bold text-white tracking-wider">Titanium Frame</h4>
-            <p class="text-[10px] text-slate-400">Military-Grade Precision</p>
+      <div class="hero-visual reveal">
+        <div class="glow-ring"></div>
+        <div class="ai-card">
+          <div class="card-top"><span>● NOVA CORE</span><span>LIVE</span></div>
+          <div class="core">
+            <div class="core-orbit"></div>
+            <div class="core-center">N</div>
           </div>
-        </div>
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-black/40 backdrop-blur-sm border border-white/5">
-          <i class="fa-solid fa-wave-square text-brand-emerald text-xl"></i>
-          <div>
-            <h4 class="text-xs uppercase font-bold text-white tracking-wider">Hi-Res Audio</h4>
-            <p class="text-[10px] text-slate-400">40mm Beryllium Drivers</p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-black/40 backdrop-blur-sm border border-white/5">
-          <i class="fa-solid fa-shield-halved text-brand-gold text-xl"></i>
-          <div>
-            <h4 class="text-xs uppercase font-bold text-white tracking-wider">Concierge Care</h4>
-            <p class="text-[10px] text-slate-400">2-Year Luxury Warranty</p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-black/40 backdrop-blur-sm border border-white/5">
-          <i class="fa-solid fa-plane-up text-brand-emerald text-xl"></i>
-          <div>
-            <h4 class="text-xs uppercase font-bold text-white tracking-wider">Fast Courier</h4>
-            <p class="text-[10px] text-slate-400">Express Global Delivery</p>
+          <div class="signal">
+            <div><span>Tasks automated</span><strong>2,481</strong></div>
+            <div><span>Time saved</span><strong>184h</strong></div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section class="logos reveal">
+      <p>TRUSTED BY AMBITIOUS TEAMS</p>
+      <div><b>VERTEX</b><b>ORBIT</b><b>ARC</b><b>LUMEN</b><b>MONO</b></div>
+    </section>
 
-  <!-- ================= 1. TOP CATEGORIES ================= -->
-  <section id="categories" class="py-24 bg-brand-black relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase font-bold tracking-[0.3em] text-brand-gold">Curated Portfolios</span>
-          <h2 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-2">Elite Categories</h2>
-        </div>
-        <p class="text-slate-400 text-sm max-w-md mt-3 md:mt-0">
-          Engineered for connoisseurs of fine technology and seamless lifestyle performance.
-        </p>
+    <section id="features" class="section">
+      <div class="section-head reveal">
+        <span class="eyebrow">CAPABILITIES</span>
+        <h2>One AI layer.<br><span>Endless possibilities.</span></h2>
       </div>
+      <div class="feature-grid">
+        <article class="feature reveal"><div class="icon">✦</div><h3>AI Workflow Automation</h3><p>Turn repetitive processes into intelligent workflows that run in the background.</p></article>
+        <article class="feature reveal"><div class="icon">◈</div><h3>Intelligent Data Analysis</h3><p>Ask questions in plain language and get useful insights from your data.</p></article>
+        <article class="feature reveal"><div class="icon">⌁</div><h3>AI Agents</h3><p>Give your team autonomous assistants that can plan, execute and report back.</p></article>
+        <article class="feature reveal"><div class="icon">◎</div><h3>Real-Time Collaboration</h3><p>Bring people and AI together in one focused workspace.</p></article>
+      </div>
+    </section>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Cat 1 -->
-        <div onclick="filterCategory('smartphones')" class="group relative rounded-2xl overflow-hidden cursor-pointer h-80 glass-card">
-          <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop" alt="Luxury Phones" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-[10px] uppercase tracking-widest text-brand-emerald font-semibold">Flagship Range</span>
-            <h3 class="font-serif text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Smartphones</h3>
-            <p class="text-xs text-slate-300 mt-1">Foldables, Pro Max, &amp; Bespoke Editions</p>
-          </div>
-        </div>
-
-        <!-- Cat 2 -->
-        <div onclick="filterCategory('audio')" class="group relative rounded-2xl overflow-hidden cursor-pointer h-80 glass-card">
-          <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=800&auto=format&fit=crop" alt="Premium Audio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-[10px] uppercase tracking-widest text-brand-emerald font-semibold">Acoustic Mastery</span>
-            <h3 class="font-serif text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Headphones &amp; Audio</h3>
-            <p class="text-xs text-slate-300 mt-1">Studio grade wireless soundscapes</p>
-          </div>
-        </div>
-
-        <!-- Cat 3 -->
-        <div onclick="filterCategory('wearables')" class="group relative rounded-2xl overflow-hidden cursor-pointer h-80 glass-card">
-          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop" alt="Smartwatches" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-[10px] uppercase tracking-widest text-brand-emerald font-semibold">Haute Horlogerie</span>
-            <h3 class="font-serif text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Smartwatches</h3>
-            <p class="text-xs text-slate-300 mt-1">Sapphire crystal &amp; health telemetry</p>
-          </div>
-        </div>
-
-        <!-- Cat 4 -->
-        <div onclick="filterCategory('accessories')" class="group relative rounded-2xl overflow-hidden cursor-pointer h-80 glass-card">
-          <img src="https://images.unsplash.com/photo-1622445262464-84b1456045b6?q=80&w=800&auto=format&fit=crop" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-[10px] uppercase tracking-widest text-brand-emerald font-semibold">Exotic Leather &amp; Power</span>
-            <h3 class="font-serif text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Luxury Accessories</h3>
-            <p class="text-xs text-slate-300 mt-1">MagSafe docks, cases &amp; chargers</p>
-          </div>
+    <section id="product" class="section product-section">
+      <div class="section-head reveal">
+        <span class="eyebrow">THE PLATFORM</span>
+        <h2>See your work<br><span>come alive.</span></h2>
+      </div>
+      <div class="dashboard reveal">
+        <aside>
+          <div class="dash-logo">N</div>
+          <a class="active">Overview</a><a>Workflows</a><a>AI Agents</a><a>Analytics</a><a>Settings</a>
+        </aside>
+        <div class="dash-main">
+          <div class="dash-head"><div><small>MONDAY, SEPT 13</small><h3>Good evening, Alex.</h3></div><button>+ New workflow</button></div>
+          <div class="stats"><div><small>AI TASKS</small><strong>2,481</strong><span>+18.4%</span></div><div><small>HOURS SAVED</small><strong>184.2</strong><span>+12.8%</span></div><div><small>SUCCESS RATE</small><strong>98.7%</strong><span>+2.1%</span></div></div>
+          <div class="chart"><div class="chart-title">Automation activity <span>Last 7 days</span></div><div class="bars"><i style="height:35%"></i><i style="height:55%"></i><i style="height:43%"></i><i style="height:72%"></i><i style="height:62%"></i><i style="height:88%"></i><i style="height:96%"></i></div></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ================= 2. FEATURED PRODUCTS ================= -->
-  <section id="products" class="py-24 bg-brand-dark relative border-t border-b border-brand-gold/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs uppercase font-bold tracking-[0.3em] text-brand-emerald">Exclusive Hardware</span>
-        <h2 class="font-serif text-3xl sm:text-5xl text-white font-bold mt-2">Featured Flagships</h2>
-        <p class="text-slate-400 text-sm mt-3">Handcrafted metals, tuned acoustics and unrivaled mobile power.</p>
-        
-        <!-- Category Filter Tabs -->
-        <div class="flex flex-wrap justify-center gap-2 mt-8">
-          <button onclick="renderProducts('all')" class="cat-pill active px-5 py-2 rounded-full text-xs uppercase font-semibold tracking-wider transition-all bg-brand-gold text-brand-black" data-filter="all">All Items</button>
-          <button onclick="renderProducts('smartphones')" class="cat-pill px-5 py-2 rounded-full text-xs uppercase font-semibold tracking-wider transition-all bg-brand-card text-slate-300 hover:text-white" data-filter="smartphones">Smartphones</button>
-          <button onclick="renderProducts('audio')" class="cat-pill px-5 py-2 rounded-full text-xs uppercase font-semibold tracking-wider transition-all bg-brand-card text-slate-300 hover:text-white" data-filter="audio">Audio</button>
-          <button onclick="renderProducts('wearables')" class="cat-pill px-5 py-2 rounded-full text-xs uppercase font-semibold tracking-wider transition-all bg-brand-card text-slate-300 hover:text-white" data-filter="wearables">Wearables</button>
-          <button onclick="renderProducts('accessories')" class="cat-pill px-5 py-2 rounded-full text-xs uppercase font-semibold tracking-wider transition-all bg-brand-card text-slate-300 hover:text-white" data-filter="accessories">Accessories</button>
-        </div>
+    <section class="section workflow">
+      <div class="section-head reveal"><span class="eyebrow">HOW IT WORKS</span><h2>From input<br><span>to impact.</span></h2></div>
+      <div class="steps">
+        <div class="step reveal"><b>01</b><h3>Connect your workflow</h3><p>Bring your tools, data and processes into NOVA.</p></div>
+        <div class="step reveal"><b>02</b><h3>Let AI do the work</h3><p>Build an automation or let an AI agent execute it.</p></div>
+        <div class="step reveal"><b>03</b><h3>Track the results</h3><p>Measure performance and continuously improve.</p></div>
       </div>
+    </section>
 
-      <!-- Products Grid -->
-      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
-        <!-- Rendered by JS -->
+    <section id="pricing" class="section pricing">
+      <div class="section-head reveal"><span class="eyebrow">SIMPLE PRICING</span><h2>Start small.<br><span>Scale without limits.</span></h2></div>
+      <div class="price-grid">
+        <article class="price-card reveal"><small>STARTER</small><h3>$19<span>/mo</span></h3><p>For individuals getting started.</p><hr><p>✓ 5 workflows</p><p>✓ 1,000 AI tasks</p><p>✓ Basic analytics</p><a class="btn ghost" href="#">Choose Starter</a></article>
+        <article class="price-card featured reveal"><div class="popular">MOST POPULAR</div><small>PRO</small><h3>$49<span>/mo</span></h3><p>For teams ready to automate.</p><hr><p>✓ Unlimited workflows</p><p>✓ 10,000 AI tasks</p><p>✓ Advanced analytics</p><a class="btn primary" href="#">Start Pro</a></article>
+        <article class="price-card reveal"><small>SCALE</small><h3>$149<span>/mo</span></h3><p>For growing organizations.</p><hr><p>✓ Unlimited AI tasks</p><p>✓ Priority support</p><p>✓ Enterprise controls</p><a class="btn ghost" href="#">Choose Scale</a></article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ================= 3. FLASH SALE / SPOTLIGHT DEAL ================= -->
-  <section id="deals" class="py-24 bg-brand-black relative overflow-hidden">
-    <!-- Glow Orb Decor -->
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl p-8 sm:p-14 glass-card relative border border-brand-emerald/30 neon-border-glow">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          <div>
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-emerald/20 text-brand-emerald text-xs uppercase font-bold tracking-widest mb-6">
-              <i class="fa-solid fa-bolt"></i>
-              <span>Flash Sale • Limited Masterpiece</span>
-            </div>
-            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight">
-              Aura Master ANC <br />
-              <span class="text-brand-emerald">Emerald &amp; Gold Edition</span>
-            </h2>
-            <p class="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-light">
-              As seen in our cinematic reveal: equipped with 40mm Beryllium drivers, pure active noise cancellation, and high-purity gold acoustic chambers for celestial fidelity.
-            </p>
-
-            <!-- Countdown Timer -->
-            <div class="grid grid-cols-4 gap-3 my-8 max-w-sm">
-              <div class="bg-brand-black/80 p-3 rounded-xl border border-brand-gold/20 text-center">
-                <span id="deal-hours" class="block font-serif text-2xl sm:text-3xl font-bold text-brand-gold">14</span>
-                <span class="text-[10px] uppercase text-slate-400 tracking-wider">Hours</span>
-              </div>
-              <div class="bg-brand-black/80 p-3 rounded-xl border border-brand-gold/20 text-center">
-                <span id="deal-mins" class="block font-serif text-2xl sm:text-3xl font-bold text-brand-gold">38</span>
-                <span class="text-[10px] uppercase text-slate-400 tracking-wider">Mins</span>
-              </div>
-              <div class="bg-brand-black/80 p-3 rounded-xl border border-brand-gold/20 text-center">
-                <span id="deal-secs" class="block font-serif text-2xl sm:text-3xl font-bold text-brand-emerald">49</span>
-                <span class="text-[10px] uppercase text-slate-400 tracking-wider">Secs</span>
-              </div>
-              <div class="bg-brand-black/80 p-3 rounded-xl border border-brand-gold/20 text-center">
-                <span class="block font-serif text-2xl sm:text-3xl font-bold text-brand-emerald">-25%</span>
-                <span class="text-[10px] uppercase text-slate-400 tracking-wider">Off</span>
-              </div>
-            </div>
-
-            <!-- Price & Buy -->
-            <div class="flex items-center space-x-6">
-              <div>
-                <span class="text-xs text-slate-400 line-through block">$799.00</span>
-                <span class="text-3xl font-serif font-bold text-white">$599.00</span>
-              </div>
-              <button onclick="addToCart(99, 'Aura Master ANC (Emerald & Gold)', 599, 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=800&auto=format&fit=crop')" class="px-8 py-3.5 rounded-full bg-brand-emerald text-brand-black font-bold uppercase tracking-wider text-xs hover:bg-emerald-400 shadow-lg shadow-brand-emerald/20 transition-all">
-                Claim Offer Now
-              </button>
-            </div>
-          </div>
-
-          <!-- Product Showcase Card inside Deal -->
-          <div class="relative flex justify-center items-center">
-            <div class="w-full max-w-md aspect-square rounded-2xl overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop" alt="Emerald Gold Masterpiece" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
-              
-              <div class="absolute top-4 right-4 bg-brand-card/90 border border-brand-gold/40 px-3 py-1 rounded-full text-[11px] font-semibold text-brand-gold">
-                <i class="fa-solid fa-crown mr-1 text-xs"></i> 25 Units Left
-              </div>
-
-              <div class="absolute bottom-6 left-6 right-6">
-                <div class="flex items-center space-x-3 text-xs text-slate-300">
-                  <span class="px-2 py-1 rounded bg-black/60 border border-white/10">30H Playtime</span>
-                  <span class="px-2 py-1 rounded bg-black/60 border border-white/10">Bluetooth 5.3</span>
-                  <span class="px-2 py-1 rounded bg-black/60 border border-white/10">Wireless ANC</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+    <section id="faq" class="section faq">
+      <div class="section-head reveal"><span class="eyebrow">FAQ</span><h2>Questions,<br><span>answered.</span></h2></div>
+      <div class="faq-list">
+        <details><summary>Do I need coding experience?</summary><p>No. NOVA is designed around visual workflows and natural-language instructions.</p></details>
+        <details><summary>Can NOVA connect to my existing tools?</summary><p>Yes. The platform is designed to connect common business tools and data sources.</p></details>
+        <details><summary>Can I cancel anytime?</summary><p>Yes. Plans are designed to be flexible with no long-term commitment.</p></details>
+        <details><summary>Is my data secure?</summary><p>NOVA is designed with privacy and security controls suitable for modern teams.</p></details>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ================= 4. WHY CHOOSE CART EXPRESS ================= -->
-  <section id="concierge" class="py-24 bg-brand-dark/50 border-t border-brand-gold/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-xs uppercase font-bold tracking-[0.3em] text-brand-gold">The Standard of Excellence</span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-2">Why Discerning Clients Choose Cart Express</h2>
-      </div>
+    <section class="final-cta reveal">
+      <span class="eyebrow">READY?</span>
+      <h2>Your next workflow<br><em>could run itself.</em></h2>
+      <a class="btn primary" href="#pricing">Start Building Free <span>→</span></a>
+    </section>
+  </main>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Feature 1 -->
-        <div class="glass-card p-8 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-5">
-            <i class="fa-solid fa-shield-cat text-2xl"></i>
-          </div>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">100% Authenticity</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Direct manufacturer partnerships and serial verification certificates included with every unboxing.</p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="glass-card p-8 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 flex items-center justify-center text-brand-emerald mb-5">
-            <i class="fa-solid fa-jet-fighter-up text-2xl"></i>
-          </div>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">White-Glove Express</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Secured priority air shipping worldwide in temperature-regulated tamper-evident luxury parcels.</p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="glass-card p-8 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-5">
-            <i class="fa-solid fa-hand-holding-hand text-2xl"></i>
-          </div>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">VIP Concierge 24/7</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Dedicated personal tech advisors ready to assist with device pairing, migration, and custom finishes.</p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="glass-card p-8 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 flex items-center justify-center text-brand-emerald mb-5">
-            <i class="fa-solid fa-repeat text-2xl"></i>
-          </div>
-          <h3 class="font-serif text-lg font-bold text-white mb-2">30-Day Pure Exchange</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Effortless concierge returns and complimentary device trade-in valuations at guaranteed high tier.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 5. CUSTOMER TESTIMONIALS ================= -->
-  <section class="py-24 bg-brand-black relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-xs uppercase font-bold tracking-[0.3em] text-brand-emerald">Patron Acclaim</span>
-        <h2 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-2">Trusted By Global Executives</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Testimonial 1 -->
-        <div class="glass-card p-8 rounded-2xl relative">
-          <div class="flex text-brand-gold mb-4 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i>
-          </div>
-          <p class="text-slate-300 text-sm leading-relaxed italic mb-6">
-            “The Emerald Edition headphones sound sublime. Arrived in Zurich within 36 hours in genuine custom packaging. Cart Express defines luxury e-commerce.”
-          </p>
-          <div class="flex items-center space-x-3">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover border border-brand-gold/40" alt="Avatar">
-            <div>
-              <h4 class="text-sm font-bold text-white">Alexander von Berg</h4>
-              <p class="text-[11px] text-slate-400">Zurich • Verified Collector</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="glass-card p-8 rounded-2xl relative border-brand-gold/30">
-          <div class="flex text-brand-gold mb-4 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i>
-          </div>
-          <p class="text-slate-300 text-sm leading-relaxed italic mb-6">
-            “I sourced customized titanium smartphones for our entire board. The dedicated VIP concierge made device deployment effortless. Exceptional service.”
-          </p>
-          <div class="flex items-center space-x-3">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover border border-brand-gold/40" alt="Avatar">
-            <div>
-              <h4 class="text-sm font-bold text-white">Elena Rostova</h4>
-              <p class="text-[11px] text-slate-400">London • Venture Partner</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="glass-card p-8 rounded-2xl relative">
-          <div class="flex text-brand-gold mb-4 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i><i class="fa-solid fa-star ml-1"></i>
-          </div>
-          <p class="text-slate-300 text-sm leading-relaxed italic mb-6">
-            “No other mobile store comes close. Authentic serial credentials, unboxing that feels like buying high jewelry, and truly flawless acoustics.”
-          </p>
-          <div class="flex items-center space-x-3">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover border border-brand-gold/40" alt="Avatar">
-            <div>
-              <h4 class="text-sm font-bold text-white">Marcus Sterling</h4>
-              <p class="text-[11px] text-slate-400">Dubai • Private Office</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 6. NEWSLETTER ================= -->
-  <section class="py-20 bg-brand-dark relative border-t border-brand-gold/10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-      <div class="p-10 rounded-3xl glass-card relative overflow-hidden">
-        <span class="text-xs uppercase font-bold tracking-[0.35em] text-brand-gold">Private Salon</span>
-        <h2 class="font-serif text-2xl sm:text-4xl text-white font-bold mt-2 mb-3">Join The Cart Express Society</h2>
-        <p class="text-slate-300 text-sm max-w-lg mx-auto mb-8 font-light">
-          Receive confidential allocations of limited edition flagships, rare colorways, and VIP invitations to international audio expos.
-        </p>
-
-        <form id="newsletter-form" onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-          <input type="email" required placeholder="Enter your private email..." class="flex-1 px-5 py-3.5 rounded-full bg-brand-black/90 border border-brand-gold/30 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-brand-gold" />
-          <button type="submit" class="px-8 py-3.5 rounded-full bg-brand-gold text-brand-black font-bold uppercase tracking-wider text-xs hover:bg-brand-goldLight transition-all">
-            Join VIP
-          </button>
-        </form>
-        <span id="newsletter-status" class="block text-xs text-brand-emerald mt-3 hidden font-medium">Invitation confirmed. Welcome to Cart Express.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 7. FOOTER ================= -->
-  <footer class="bg-brand-black text-slate-400 text-xs border-t border-brand-gold/15 pt-16 pb-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
-        
-        <!-- Brand Info -->
-        <div class="lg:col-span-2">
-          <div class="flex items-center space-x-3 mb-4">
-            <div class="w-8 h-8 rounded bg-brand-gold flex items-center justify-center font-serif text-brand-black font-bold text-sm">CX</div>
-            <span class="font-serif font-bold tracking-[0.2em] text-lg text-white">CART EXPRESS</span>
-          </div>
-          <p class="text-slate-400 text-xs leading-relaxed max-w-sm mb-6">
-            The world’s definitive destination for luxury mobile devices, artisanal acoustics, and certified flagship technology.
-          </p>
-          <div class="flex items-center space-x-4 text-base">
-            <a href="#" class="w-9 h-9 rounded-full bg-brand-card flex items-center justify-center text-slate-300 hover:text-brand-gold hover:border-brand-gold border border-white/5 transition-all"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="w-9 h-9 rounded-full bg-brand-card flex items-center justify-center text-slate-300 hover:text-brand-gold hover:border-brand-gold border border-white/5 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" class="w-9 h-9 rounded-full bg-brand-card flex items-center justify-center text-slate-300 hover:text-brand-gold hover:border-brand-gold border border-white/5 transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" class="w-9 h-9 rounded-full bg-brand-card flex items-center justify-center text-slate-300 hover:text-brand-gold hover:border-brand-gold border border-white/5 transition-all"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <!-- Col 1 -->
-        <div>
-          <h4 class="font-serif text-white uppercase tracking-wider font-bold mb-4 text-xs">Flagship Portfolios</h4>
-          <ul class="space-y-2.5">
-            <li><a href="#products" onclick="filterCategory('smartphones')" class="hover:text-brand-gold transition-colors">Titanium Smartphones</a></li>
-            <li><a href="#products" onclick="filterCategory('audio')" class="hover:text-brand-gold transition-colors">Beryllium ANC Audio</a></li>
-            <li><a href="#products" onclick="filterCategory('wearables')" class="hover:text-brand-gold transition-colors">Sapphire Wearables</a></li>
-            <li><a href="#products" onclick="filterCategory('accessories')" class="hover:text-brand-gold transition-colors">Exotic Charging Hubs</a></li>
-            <li><a href="#deals" class="hover:text-brand-gold transition-colors">Limited Vault Sales</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 2 -->
-        <div>
-          <h4 class="font-serif text-white uppercase tracking-wider font-bold mb-4 text-xs">VIP Services</h4>
-          <ul class="space-y-2.5">
-            <li><a href="#" class="hover:text-brand-gold transition-colors">White Glove Courier</a></li>
-            <li><a href="#" class="hover:text-brand-gold transition-colors">Serial Authenticity Check</a></li>
-            <li><a href="#" class="hover:text-brand-gold transition-colors">2-Year Luxury Warranty</a></li>
-            <li><a href="#" class="hover:text-brand-gold transition-colors">Corporate Gifting</a></li>
-            <li><a href="#" class="hover:text-brand-gold transition-colors">Custom Gold Plating</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3 -->
-        <div>
-          <h4 class="font-serif text-white uppercase tracking-wider font-bold mb-4 text-xs">Headquarters</h4>
-          <p class="text-xs text-slate-400 mb-2">Cart Express Flagship Atelier</p>
-          <p class="text-xs text-slate-400 mb-4">450 Avenue Montaigne, Paris<br />Level 42, DIFC Dubai</p>
-          <p class="text-brand-gold font-mono text-xs">concierge@cartexpress.store</p>
-        </div>
-
-      </div>
-
-      <!-- Bottom Bar -->
-      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
-        <div>
-          &copy; <span id="year"></span> CART EXPRESS – Luxury Mobile Store. All rights reserved.
-        </div>
-        <div class="flex items-center space-x-6">
-          <a href="#" class="hover:text-slate-300">Privacy Policy</a>
-          <a href="#" class="hover:text-slate-300">Terms of Vault</a>
-          <a href="#" class="hover:text-slate-300">Compliance &amp; Export</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ================= CART DRAWER ================= -->
-  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="cart-drawer" class="fixed top-0 right-0 w-full max-w-md h-full bg-brand-card/95 border-l border-brand-gold/25 z-50 transform translate-x-full transition-transform duration-300 flex flex-col backdrop-blur-2xl">
-    
-    <!-- Header -->
-    <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <i class="fa-solid fa-bag-shopping text-brand-gold"></i>
-        <h3 class="font-serif font-bold text-lg text-white">Your Selection</h3>
-      </div>
-      <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-white p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-    </div>
-
-    <!-- Items List -->
-    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-      <!-- Injected by JS -->
-    </div>
-
-    <!-- Footer / Checkout -->
-    <div class="p-6 border-t border-brand-gold/20 bg-brand-black/60 space-y-4">
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-400">Subtotal</span>
-        <span id="cart-subtotal" class="font-serif font-bold text-white text-base">$0.00</span>
-      </div>
-      <div class="flex justify-between text-xs text-slate-400">
-        <span>Insured Priority Shipping</span>
-        <span class="text-brand-emerald uppercase font-semibold">Complimentary</span>
-      </div>
-      <button onclick="openCheckoutModal()" class="w-full py-4 rounded-full bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-xs hover:bg-brand-goldLight transition-colors">
-        Proceed To Checkout
-      </button>
-      <button onclick="clearCart()" class="w-full py-2 text-[11px] text-slate-500 hover:text-red-400 transition-colors uppercase">
-        Empty Cart
-      </button>
-    </div>
-  </aside>
-
-  <!-- ================= WISHLIST DRAWER ================= -->
-  <div id="wishlist-drawer-backdrop" onclick="toggleWishlistDrawer(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="wishlist-drawer" class="fixed top-0 right-0 w-full max-w-md h-full bg-brand-card/95 border-l border-brand-gold/25 z-50 transform translate-x-full transition-transform duration-300 flex flex-col backdrop-blur-2xl">
-    <div class="p-6 border-b border-brand-gold/20 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <i class="fa-regular fa-heart text-brand-gold"></i>
-        <h3 class="font-serif font-bold text-lg text-white">Curated Wishlist</h3>
-      </div>
-      <button onclick="toggleWishlistDrawer(false)" class="text-slate-400 hover:text-white p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-    </div>
-    <div id="wishlist-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-      <!-- Injected by JS -->
-    </div>
-  </aside>
-
-  <!-- ================= SEARCH MODAL ================= -->
-  <div id="search-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-start justify-center pt-24 px-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="w-full max-w-2xl bg-brand-card border border-brand-gold/30 rounded-2xl p-6 shadow-2xl relative">
-      <button onclick="toggleSearchModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-white">
-        <i class="fa-solid fa-xmark text-xl"></i>
-      </button>
-      
-      <div class="flex items-center border-b border-brand-gold/25 pb-3 pr-10">
-        <i class="fa-solid fa-magnifying-glass text-brand-gold text-lg mr-3"></i>
-        <input id="search-input" onkeyup="handleLiveSearch()" type="text" placeholder="Search smartphones, headphones, titanium models..." class="w-full bg-transparent text-white text-base focus:outline-none placeholder-slate-500" />
-      </div>
-
-      <div id="search-results" class="mt-6 max-h-80 overflow-y-auto divide-y divide-white/5">
-        <p class="text-xs text-slate-400 text-center py-6">Type to search the Cart Express vault...</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= CHECKOUT MODAL ================= -->
-  <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="w-full max-w-lg bg-brand-card border border-brand-gold/40 rounded-3xl p-8 relative max-h-[90vh] overflow-y-auto shadow-2xl">
-      <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-gold">Secure Gateway</span>
-      <h3 class="font-serif text-2xl font-bold text-white mt-1 mb-6">VIP Checkout Express</h3>
-
-      <form onsubmit="handlePlaceOrder(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs uppercase font-medium text-slate-300 mb-1">Full Legal Name</label>
-          <input required type="text" placeholder="Lord / Lady / Executive" class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-gold/20 text-white text-xs focus:outline-none focus:border-brand-gold" />
-        </div>
-        <div>
-          <label class="block text-xs uppercase font-medium text-slate-300 mb-1">Delivery Address</label>
-          <input required type="text" placeholder="Diplomatic / Penthouse / Residence" class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-gold/20 text-white text-xs focus:outline-none focus:border-brand-gold" />
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs uppercase font-medium text-slate-300 mb-1">City / Country</label>
-            <input required type="text" placeholder="Monaco, MC" class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-gold/20 text-white text-xs focus:outline-none focus:border-brand-gold" />
-          </div>
-          <div>
-            <label class="block text-xs uppercase font-medium text-slate-300 mb-1">Postal Code</label>
-            <input required type="text" placeholder="98000" class="w-full px-4 py-2.5 rounded-xl bg-brand-black border border-brand-gold/20 text-white text-xs focus:outline-none focus:border-brand-gold" />
-          </div>
-        </div>
-        <div class="pt-2">
-          <label class="block text-xs uppercase font-medium text-slate-300 mb-1">Payment Method</label>
-          <div class="grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="p-2.5 rounded-xl bg-brand-black border border-brand-gold text-brand-gold font-semibold cursor-pointer">
-              <i class="fa-regular fa-credit-card mr-1"></i> Black Card
-            </div>
-            <div class="p-2.5 rounded-xl bg-brand-black/40 border border-white/10 text-slate-400 cursor-pointer">
-              <i class="fa-brands fa-apple mr-1"></i> Apple Pay
-            </div>
-            <div class="p-2.5 rounded-xl bg-brand-black/40 border border-white/10 text-slate-400 cursor-pointer">
-              <i class="fa-brands fa-bitcoin mr-1"></i> Crypto
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-black/40 border border-brand-gold/15 mt-4">
-          <div class="flex justify-between text-xs text-slate-300 mb-1">
-            <span>Cart Express Verification:</span>
-            <span class="text-brand-emerald">Authenticated</span>
-          </div>
-          <div class="flex justify-between text-sm font-bold text-white">
-            <span>Total Payable:</span>
-            <span id="checkout-total-val" class="text-brand-gold font-serif">$0.00</span>
-          </div>
-        </div>
-
-        <button type="submit" class="w-full py-4 rounded-full bg-brand-gold text-brand-black font-bold uppercase tracking-widest text-xs hover:bg-brand-goldLight transition-all mt-4">
-          Authorize &amp; Complete Order
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= JAVASCRIPT ================= -->
-  <script>
-    // Product Database
-    const products = [
-      {
-        id: 1,
-        title: "Aura Master ANC Headphone",
-        category: "audio",
-        price: 599,
-        tag: "Video Showcase",
-        image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=800&auto=format&fit=crop",
-        desc: "40mm Beryllium Drivers, 30H Playtime, Bluetooth 5.3 Emerald trim."
-      },
-      {
-        id: 2,
-        title: "Apex Titanium Fold V",
-        category: "smartphones",
-        price: 2199,
-        tag: "Bespoke Flagship",
-        image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop",
-        desc: "Dual OLED sapphire glass display with pure aerospace grade titanium chassis."
-      },
-      {
-        id: 3,
-        title: "Chronos Ultra Haute Watch",
-        category: "wearables",
-        price: 1250,
-        tag: "New Release",
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
-        desc: "ECG heart telemetry with ceramic bezel and 18K gold hand-stitched strap."
-      },
-      {
-        id: 4,
-        title: "Kevlar & Gold MagSafe Hub",
-        category: "accessories",
-        price: 340,
-        tag: "Limited Craft",
-        image: "https://images.unsplash.com/photo-1622445262464-84b1456045b6?q=80&w=800&auto=format&fit=crop",
-        desc: "Fast multi-device simultaneous wireless induction dock with ambient backlight."
-      },
-      {
-        id: 5,
-        title: "Vanguard Obsidian 15 Pro",
-        category: "smartphones",
-        price: 1899,
-        tag: "Exclusive",
-        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02597?q=80&w=800&auto=format&fit=crop",
-        desc: "Periscope 10x optical matrix camera and encrypted hardware enclave."
-      },
-      {
-        id: 6,
-        title: "Celestial True Wireless Pods",
-        category: "audio",
-        price: 380,
-        tag: "Audiophile",
-        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800&auto=format&fit=crop",
-        desc: "Spatial audio rendering with bespoke titanium charging pod."
-      },
-      {
-        id: 7,
-        title: "Horology Smart Band Noir",
-        category: "wearables",
-        price: 690,
-        tag: "Prestige",
-        image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop",
-        desc: "Discrete curved micro-AMOLED band with haptic biometric feedback."
-      },
-      {
-        id: 8,
-        title: "Alligator Leather Device Sleeve",
-        category: "accessories",
-        price: 290,
-        tag: "Handcrafted",
-        image: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop",
-        desc: "Sourced Italian tanned leather with microfiber interior polish lining."
-      }
-    ];
-
-    // State
-    let cart = [];
-    let wishlist = [];
-
-    // Initialize
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById('year').textContent = new Date().getFullYear();
-      renderProducts('all');
-      startCountdown();
-    });
-
-    // Render Product Grid
-    function renderProducts(category = 'all') {
-      const container = document.getElementById('product-grid');
-      const filtered = category === 'all' 
-        ? products 
-        : products.filter(p => p.category === category);
-
-      // Tab pills active state
-      document.querySelectorAll('.cat-pill').forEach(btn => {
-        if (btn.dataset.filter === category) {
-          btn.classList.add('bg-brand-gold', 'text-brand-black');
-          btn.classList.remove('bg-brand-card', 'text-slate-300');
-        } else {
-          btn.classList.remove('bg-brand-gold', 'text-brand-black');
-          btn.classList.add('bg-brand-card', 'text-slate-300');
-        }
-      });
-
-      container.innerHTML = filtered.map(p => {
-        const isWish = wishlist.some(item => item.id === p.id);
-        return `
-          <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-            <div class="relative overflow-hidden aspect-square">
-              <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-              
-              <span class="absolute top-3 left-3 bg-brand-black/80 border border-brand-gold/30 text-brand-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                ${p.tag}
-              </span>
-
-              <button onclick="toggleWishlistItem(${p.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-brand-black/80 border border-white/10 flex items-center justify-center transition-colors ${isWish ? 'text-red-500' : 'text-slate-300 hover:text-white'}">
-                <i class="${isWish ? 'fa-solid' : 'fa-regular'} fa-heart text-xs"></i>
-              </button>
-            </div>
-
-            <div class="p-5 flex-1 flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-emerald">${p.category}</span>
-                <h3 class="font-serif font-bold text-white text-base mt-1 line-clamp-1 group-hover:text-brand-gold transition-colors">${p.title}</h3>
-                <p class="text-xs text-slate-400 mt-1 line-clamp-2">${p.desc}</p>
-              </div>
-
-              <div class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] uppercase text-slate-400 block font-medium">Price</span>
-                  <span class="font-serif font-bold text-white text-lg">$${p.price.toLocaleString()}</span>
-                </div>
-                <button onclick="addToCart(${p.id}, '${p.title}', ${p.price}, '${p.image}')" class="px-4 py-2 rounded-full bg-brand-gold text-brand-black text-xs font-bold uppercase tracking-wider hover:bg-brand-goldLight transition-all flex items-center space-x-1.5 shadow-md">
-                  <i class="fa-solid fa-plus text-[10px]"></i>
-                  <span>Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function filterCategory(category) {
-      const section = document.getElementById('products');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-      renderProducts(category);
-    }
-
-    // Cart Operations
-    function addToCart(id, title, price, image) {
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ id, title, price, image, quantity: 1 });
-      }
-      updateCartUI();
-      showToast(`Added "${title}" to your order.`);
-    }
-
-    function changeQuantity(id, delta) {
-      const item = cart.find(item => item.id === id);
-      if (!item) return;
-      item.quantity += delta;
-      if (item.quantity <= 0) {
-        cart = cart.filter(i => i.id !== id);
-      }
-      updateCartUI();
-    }
-
-    function clearCart() {
-      cart = [];
-      updateCartUI();
-      showToast("Cart has been cleared.");
-    }
-
-    function updateCartUI() {
-      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      
-      document.getElementById('cart-badge').textContent = count;
-      document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
-      document.getElementById('checkout-total-val').textContent = `$${subtotal.toLocaleString()}`;
-
-      const container = document.getElementById('cart-items');
-      if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="h-64 flex flex-col items-center justify-center text-center">
-            <i class="fa-solid fa-bag-shopping text-4xl text-slate-600 mb-3"></i>
-            <p class="text-sm text-slate-400">Your selection is currently empty.</p>
-            <button onclick="toggleCartDrawer(false)" class="mt-4 text-xs font-bold text-brand-gold uppercase tracking-widest hover:underline">Explore Catalog</button>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = cart.map(item => `
-        <div class="flex items-center space-x-3 p-3 rounded-xl bg-brand-black/60 border border-white/5">
-          <img src="${item.image}" alt="${item.title}" class="w-14 h-14 rounded-lg object-cover" />
-          <div class="flex-1 min-w-0">
-            <h4 class="text-xs font-bold text-white truncate">${item.title}</h4>
-            <span class="text-xs text-brand-gold font-serif font-semibold">$${item.price.toLocaleString()}</span>
-            <div class="flex items-center space-x-2 mt-1">
-              <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-brand-card border border-white/10 flex items-center justify-center text-[10px] text-slate-300">-</button>
-              <span class="text-xs text-white font-medium">${item.quantity}</span>
-              <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-brand-card border border-white/10 flex items-center justify-center text-[10px] text-slate-300">+</button>
-            </div>
-          </div>
-          <button onclick="changeQuantity(${item.id}, -${item.quantity})" class="text-slate-500 hover:text-red-400 p-1">
-            <i class="fa-regular fa-trash-can text-sm"></i>
-          </button>
-        </div>
-      `).join('');
-    }
-
-    // Wishlist Operations
-    function toggleWishlistItem(id) {
-      const prod = products.find(p => p.id === id);
-      if (!prod) return;
-      const index = wishlist.findIndex(w => w.id === id);
-      if (index > -1) {
-        wishlist.splice(index, 1);
-        showToast(`Removed from wishlist.`);
-      } else {
-        wishlist.push(prod);
-        showToast(`Saved to wishlist.`);
-      }
-      updateWishlistUI();
-      renderProducts();
-    }
-
-    function updateWishlistUI() {
-      const badge = document.getElementById('wishlist-badge');
-      if (wishlist.length > 0) {
-        badge.textContent = wishlist.length;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
-
-      const container = document.getElementById('wishlist-items');
-      if (wishlist.length === 0) {
-        container.innerHTML = `
-          <div class="h-64 flex flex-col items-center justify-center text-center">
-            <i class="fa-regular fa-heart text-4xl text-slate-600 mb-3"></i>
-            <p class="text-sm text-slate-400">No items saved yet.</p>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = wishlist.map(item => `
-        <div class="flex items-center justify-between p-3 rounded-xl bg-brand-black/60 border border-white/5">
-          <div class="flex items-center space-x-3">
-            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover" />
-            <div>
-              <h4 class="text-xs font-bold text-white truncate max-w-[150px]">${item.title}</h4>
-              <span class="text-xs text-brand-gold font-serif">$${item.price.toLocaleString()}</span>
-            </div>
-          </div>
-          <div class="flex items-center space-x-2">
-            <button onclick="addToCart(${item.id}, '${item.title}', ${item.price}, '${item.image}'); toggleWishlistItem(${item.id});" class="px-2.5 py-1.5 rounded-full bg-brand-gold text-brand-black text-[10px] font-bold uppercase">
-              Move to Cart
-            </button>
-            <button onclick="toggleWishlistItem(${item.id})" class="text-slate-500 hover:text-red-400 p-1">
-              <i class="fa-solid fa-xmark text-xs"></i>
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Drawers & Modals
-    function toggleCartDrawer(open) {
-      const drawer = document.getElementById('cart-drawer');
-      const backdrop = document.getElementById('cart-drawer-backdrop');
-      if (open) {
-        backdrop.classList.remove('opacity-0', 'pointer-events-none');
-        drawer.classList.remove('translate-x-full');
-      } else {
-        backdrop.classList.add('opacity-0', 'pointer-events-none');
-        drawer.classList.add('translate-x-full');
-      }
-    }
-
-    function toggleWishlistDrawer(open) {
-      const drawer = document.getElementById('wishlist-drawer');
-      const backdrop = document.getElementById('wishlist-drawer-backdrop');
-      if (open) {
-        backdrop.classList.remove('opacity-0', 'pointer-events-none');
-        drawer.classList.remove('translate-x-full');
-      } else {
-        backdrop.classList.add('opacity-0', 'pointer-events-none');
-        drawer.classList.add('translate-x-full');
-      }
-    }
-
-    function toggleSearchModal(open) {
-      const modal = document.getElementById('search-modal');
-      const input = document.getElementById('search-input');
-      if (open) {
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        input.focus();
-      } else {
-        modal.classList.add('opacity-0', 'pointer-events-none');
-        input.value = '';
-        document.getElementById('search-results').innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Type to search the Cart Express vault...</p>`;
-      }
-    }
-
-    function handleLiveSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
-      const resultsContainer = document.getElementById('search-results');
-      
-      if (!query) {
-        resultsContainer.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Type to search the Cart Express vault...</p>`;
-        return;
-      }
-
-      const matches = products.filter(p => 
-        p.title.toLowerCase().includes(query) || 
-        p.desc.toLowerCase().includes(query) || 
-        p.category.toLowerCase().includes(query)
-      );
-
-      if (matches.length === 0) {
-        resultsContainer.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">No bespoke items found matching "${query}".</p>`;
-        return;
-      }
-
-      resultsContainer.innerHTML = matches.map(m => `
-        <div class="py-3 flex items-center justify-between group hover:bg-white/5 px-2 rounded-lg cursor-pointer" onclick="toggleSearchModal(false); filterCategory('${m.category}')">
-          <div class="flex items-center space-x-3">
-            <img src="${m.image}" class="w-10 h-10 object-cover rounded" />
-            <div>
-              <p class="text-xs font-bold text-white group-hover:text-brand-gold transition-colors">${m.title}</p>
-              <p class="text-[10px] text-slate-400">${m.category} • $${m.price.toLocaleString()}</p>
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-brand-gold"></i>
-        </div>
-      `).join('');
-    }
-
-    function toggleMobileNav() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-
-    // Checkout
-    function openCheckoutModal() {
-      if (cart.length === 0) {
-        showToast("Your cart is empty. Please select an item.");
-        return;
-      }
-      toggleCartDrawer(false);
-      const modal = document.getElementById('checkout-modal');
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-    }
-
-    function closeCheckoutModal() {
-      const modal = document.getElementById('checkout-modal');
-      modal.classList.add('opacity-0', 'pointer-events-none');
-    }
-
-    function handlePlaceOrder(e) {
-      e.preventDefault();
-      closeCheckoutModal();
-      clearCart();
-      showToast("Order authorized! Your VIP Concierge is processing dispatch.");
-    }
-
-    // Flash sale countdown timer simulation
-    function startCountdown() {
-      let hours = 14, mins = 38, secs = 49;
-      setInterval(() => {
-        secs--;
-        if (secs < 0) {
-          secs = 59;
-          mins--;
-          if (mins < 0) {
-            mins = 59;
-            hours = hours > 0 ? hours - 1 : 24;
-          }
-        }
-        document.getElementById('deal-hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('deal-mins').textContent = String(mins).padStart(2, '0');
-        document.getElementById('deal-secs').textContent = String(secs).padStart(2, '0');
-      }, 1000);
-    }
-
-    // Toast Notice
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const msg = document.getElementById('toast-msg');
-      msg.textContent = message;
-      toast.classList.remove('translate-y-24', 'opacity-0');
-      setTimeout(() => {
-        toast.classList.add('translate-y-24', 'opacity-0');
-      }, 3500);
-    }
-
-    // Newsletter Handler
-    function handleNewsletter(e) {
-      e.preventDefault();
-      document.getElementById('newsletter-status').classList.remove('hidden');
-      e.target.reset();
-      setTimeout(() => {
-        document.getElementById('newsletter-status').classList.add('hidden');
-      }, 5000);
-    }
-  </script>
+  <footer><a class="logo" href="#">NOVA<span>AI</span></a><p>Intelligence for ambitious teams.</p><small>© 2026 NOVA AI. Fictional project.</small></footer>
+  <script src="script.js"></script>
 </body>
 </html>
