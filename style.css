@@ -101,3 +101,16 @@
   border-color: #403850;
   box-shadow: 0 12px 35px rgba(0,0,0,.25);
 }
+/* Premium Final CTA */
+.cta {
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s ease, border-color .3s ease,
+              box-shadow .3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-4px);
+  border-color: #403850;
+  box-shadow: 0 25px 60px rgba(0,0,0,.35);
+}
