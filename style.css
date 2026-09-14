@@ -114,3 +114,37 @@
   border-color: #403850;
   box-shadow: 0 25px 60px rgba(0,0,0,.35);
 }
+/* Mobile Final Polish */
+@media (max-width: 800px) {
+  .hero {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(42px, 12vw, 64px);
+    line-height: 1;
+  }
+
+  .section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .pricing-grid {
+    gap: 18px;
+  }
+
+  .price-card.featured {
+    transform: none;
+  }
+
+  .price-card.featured:hover {
+    transform: translateY(-6px);
+  }
+
+  .cta {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  }
