@@ -72,3 +72,21 @@
   margin: 0 8px;
   color: #444;
 }
+/* Premium Pricing Cards */
+.price-card {
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-8px);
+  border-color: #403850;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+.price-card.featured {
+  transform: scale(1.03);
+}
+
+.price-card.featured:hover {
+  transform: scale(1.05) translateY(-6px);
+}
