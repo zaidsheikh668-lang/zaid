@@ -55,3 +55,16 @@
   border-color: #403850;
   box-shadow: 0 15px 40px rgba(0,0,0,.3);
 }
+@media (max-width: 800px) {
+  .hero-visual {
+    min-height: 320px;
+  }
+
+  .hero-visual video {
+    width: 100%;
+    max-width: 360px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+}
