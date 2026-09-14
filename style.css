@@ -68,3 +68,7 @@
     border-radius: 20px;
   }
 }
+.trust-separator {
+  margin: 0 8px;
+  color: #444;
+}
