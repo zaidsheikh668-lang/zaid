@@ -90,3 +90,14 @@
 .price-card.featured:hover {
   transform: scale(1.05) translateY(-6px);
 }
+/* Premium FAQ */
+.faq-item {
+  transition: transform .25s ease, border-color .25s ease,
+              box-shadow .25s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+  border-color: #403850;
+  box-shadow: 0 12px 35px rgba(0,0,0,.25);
+}
